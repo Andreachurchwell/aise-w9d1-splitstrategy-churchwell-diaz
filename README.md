@@ -6,69 +6,80 @@ Week 9 Split Strategy Showdown
 ---
 
 ## 📌 Project Overview
-This repository contains our team implementation for the **W9D1 Split Strategy Showdown** assignment.  
-The goal of the project is to compare multiple evaluation strategies using the **same dataset**, the **same model**, and the **same metric**, and then analyze how each approach affects performance, variance, and overall reliability.
+This repository contains our team implementation for the AISE 26 W9D1 Split Strategy Showdown.
+Our goal is to compare different evaluation strategies on the same dataset, using the same model and the same metric, and analyze how each strategy impacts stability, variance, and trustworthiness.
 
-We are currently in the **environment setup and repository scaffolding phase**.  
-Dataset selection and modeling will begin next.
+We are now mid-way through Part A development, with the environment fully working and Partner A’s Jupyter workflow set up correctly.
 
 ---
 
 ## ✅ Current Progress
 
-### ✔ Repository Created
-- `aise-w9d1-splitstrategy-churchwell-diaz` initialized  
-- `.gitignore` created  
-- Project folder structure created in VS Code  
+### ✔ Repository + Structure Ready
+- GitHub repo initialized  
+- .gitignore created  
+- Required scaffold files added:
+  - TEAM_INFO.md
+  - eval_partner_a.py
+  - eval_partner_b.py
+  - comparison.csv
+  - RECOMMENDATION.md
 
-### ✔ Virtual Environment Setup
-- Python virtual environment created: `venv/`  
-- Core dependencies installed  
-- `requirements.txt` generated via `pip freeze`  
-- Git configured to ignore the virtual environment  
+### ✔ Virtual Environment Working
+- venv/ successfully created  
+- All dependencies installed  
+- Jupyter kernel connected inside VS Code (aise_w9d1_venv)
 
-### ✔ Assignment Scaffolding Added
-- The following required files have been created and will be populated as we progress:
-- TEAM_INFO.md
-- eval_partner_a.py
-- eval_partner_b.py
-- comparison.csv
-- RECOMMENDATION.md
+### ✔ Jupyter Notebook Working
+- partner_a_notebook.ipynb created  
+- Imports, dataset loading, splitting all verified working
 
+### ✔ Dataset Selected
+**Dataset #7 — Diabetes Regression Dataset**
 
-### ✔ README placeholder added  
-You’re reading it now — this will grow as the project evolves.
+### ✔ Metric Selected
+**R² (Coefficient of Determination)**
+
+### ✔ Partner A Code Completed (Functionally)
+- Data loaded and explored  
+- 80/20 Random Holdout implemented  
+- Ridge Regression + StandardScaler pipeline  
+- Test R² score printed  
+- 5-fold KFold CV implemented  
+- CV mean + std printed  
 
 ---
 
 ## ⏳ Next Steps
+### 🔸 1. Partner B (José)
+Implement evaluation using:
+- same dataset  
+- same metric (R²)  
+- stratified or specialized CV (based on assignment instructions)
 
-### 🔸 **1. Confirm Dataset Choice**
-We will select one of the approved datasets (e.g., Breast Cancer, Credit Card Default, Iris, etc.).  
-All partners must use the *same* dataset.
+### 🔸 2. Fill in TEAM_INFO.md
+Add:
+- names & roles  
+- dataset (#7)  
+- metric (R²)  
+- why we chose this dataset  
+- code block for loading diabetes dataset  
+- package versions
 
-### 🔸 **2. Agree on a Single Metric**
-Example metrics:  
-- Classification: ROC-AUC, PR-AUC, F1  
-- Regression: MAE, RMSE, R²  
+### 🔸 3. Populate comparison.csv
+After both scripts run, record:
+- test score  
+- CV mean  
+- CV std  
+- fold-by-fold results  
+for Partner A and Partner B.
 
-### 🔸 **3. Populate TEAM_INFO.md**
-This will include:
-- Partner roles  
-- Dataset choice  
-- Metric choice  
-- Dataset loading code  
-- Package versions  
-
-### 🔸 **4. Implement Partner A & Partner B Scripts**
-- Partner A: Random 80/20 + KFold  
-- Partner B: Stratified or TimeSeriesSplit + specialized 5-fold  
-
-### 🔸 **5. Generate comparison.csv**
-Both partner results will be added in a structured table.
-
-### 🔸 **6. Write RECOMMENDATION.md**
-Final analysis comparing variance, stability, leakage risk, and trustworthiness.
+### 🔸 4. Write RECOMMENDATION.md
+Final 200–250 word analysis comparing:
+- variance  
+- stability  
+- leakage risk  
+- which strategy we'd trust  
 
 ---
 
@@ -78,14 +89,15 @@ Final analysis comparing variance, stability, leakage risk, and trustworthiness.
 |--------------------------|------------ |
 | Repo created             | ✅ Done    |
 | venv + requirements.txt  | ✅ Done    |
-| .gitignore added         | ✅ Done    |
-| Assignment scaffolding   | ✅ Done    |
-| Dataset selected         | ⏳ Pending |
-| Metrics selected         | ⏳ Pending |
-| Partner A code           | ⏳ Pending |
+| Jupyter kernel fixed     | ✔️ Done    |
+| Dataset selected (#7)    | ✔️ Done    |
+| Metric selected (R²)     | ✔️ Done    |
+| Partner A code           | ✔️ Done    |
 | Partner B code           | ⏳ Pending |
 | comparison.csv           | ⏳ Pending |
-| Recommendation analysis  | ⏳ Pending |
+| TEAM_INFO.md             | ⏳ Pending |
+| RECOMMENDATION.md        | ⏳ Pending |
+
 
 ---
 
