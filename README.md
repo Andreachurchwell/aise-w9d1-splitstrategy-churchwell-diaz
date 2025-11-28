@@ -1,7 +1,21 @@
-# aise-w9d1-splitstrategy-churchwell-diaz
-Week 9 Split Strategy Showdown
-# 🧪 AISE Week 9 — Split Strategy Showdown  
-### **Team: Andrea Churchwell & Jose Diaz**
+<p align="center">
+  <img src="assets/cJtc.png" alt="Justice Through Code Banner" width="500"/>
+</p>
+
+<p align="center">
+  <img src="assets/jtc.png" alt="JTC Icon" width="90"/>
+</p>
+
+<h1 align="center">🧪 AISE Week 9 — Split Strategy Showdown</h1>
+<h3 align="center">Team: Andrea Churchwell & Jose Diaz</h3>
+
+<p align="center">
+  <img src="https://img.shields.io/badge/AISE-2025-blueviolet?style=for-the-badge"/>
+  <img src="https://img.shields.io/badge/Week-9-informational?style=for-the-badge"/>
+  <img src="https://img.shields.io/badge/Status-In%20Progress-yellow?style=for-the-badge"/>
+  <img src="https://img.shields.io/badge/Dataset-Diabetes-orange?style=for-the-badge"/>
+  <img src="https://img.shields.io/badge/Metric-R²-success?style=for-the-badge"/>
+</p>
 ## ❤️ Why We Chose the Diabetes Dataset
 
 We selected the Diabetes Regression dataset (#7) not just because it fits the Week 9 assignment requirements, but because the topic is personally meaningful to both of us. José's mother has lived with diabetes for years, and Andrea’s beloved cocker spaniel, Ace, also developed diabetes later in life. Working with this dataset feels more impactful and motivating since it represents a condition that has touched both of our lives. Even though this is a simple machine learning evaluation assignment, using a dataset connected to real people (and pets) we care about makes the project feel more grounded and important.
