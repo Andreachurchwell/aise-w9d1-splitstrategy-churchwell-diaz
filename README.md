@@ -29,6 +29,18 @@ We are now mid-way through Part A development, with the environment fully workin
 
 ---
 
+## 🔧 Tech Stack
+<p align="center">
+  <img src="https://img.shields.io/badge/Python-3.12-blue?style=for-the-badge&logo=python&logoColor=white"/>
+  <img src="https://img.shields.io/badge/scikit--learn-1.7.2-F7931E?style=for-the-badge&logo=scikitlearn&logoColor=white"/>
+  <img src="https://img.shields.io/badge/Pandas-2.3.3-150458?style=for-the-badge&logo=pandas&logoColor=white"/>
+  <img src="https://img.shields.io/badge/NumPy-2.3.5-013243?style=for-the-badge&logo=numpy&logoColor=white"/>
+  <img src="https://img.shields.io/badge/Jupyter-Notebook-F37626?style=for-the-badge&logo=jupyter&logoColor=white"/>
+  <img src="https://img.shields.io/badge/VS%20Code-007ACC?style=for-the-badge&logo=visualstudiocode&logoColor=white"/>
+  <img src="https://img.shields.io/badge/Machine%20Learning-Evaluation-brightgreen?style=for-the-badge"/>
+</p>
+
+
 ## ✅ Current Progress
 
 ### ✔ Repository + Structure Ready
@@ -122,7 +134,7 @@ Final 200–250 word analysis comparing:
 This README will continue evolving as we finalize the dataset and metric and begin implementing the required evaluation strategies.
 
 
+<p align="center"><i>Built with ❤️ by Andrea & Jose • JTC AISE 2025</i></p>
 <p align="center">
   <img src="assets/jtc.png" alt="JTC Icon" width="90"/>
 </p>
-<p align="center"><i>Built with ❤️ by Andrea & Jose • JTC AISE 2025</i></p>
