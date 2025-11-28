@@ -125,3 +125,4 @@ This README will continue evolving as we finalize the dataset and metric and beg
 <p align="center">
   <img src="assets/jtc.png" alt="JTC Icon" width="90"/>
 </p>
+<p align="center"><i>Built with ❤️ by Andrea & Jose • JTC AISE 2025</i></p>
