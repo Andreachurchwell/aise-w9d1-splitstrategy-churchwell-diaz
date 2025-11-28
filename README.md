@@ -2,6 +2,9 @@
 Week 9 Split Strategy Showdown
 # 🧪 AISE Week 9 — Split Strategy Showdown  
 ### **Team: Andrea Churchwell & Jose Diaz**
+## ❤️ Why We Chose the Diabetes Dataset
+
+We selected the Diabetes Regression dataset (#7) not just because it fits the Week 9 assignment requirements, but because the topic is personally meaningful to both of us. José's mother has lived with diabetes for years, and Andrea’s beloved cocker spaniel, Ace, also developed diabetes later in life. Working with this dataset feels more impactful and motivating since it represents a condition that has touched both of our lives. Even though this is a simple machine learning evaluation assignment, using a dataset connected to real people (and pets) we care about makes the project feel more grounded and important.
 
 ---
 
