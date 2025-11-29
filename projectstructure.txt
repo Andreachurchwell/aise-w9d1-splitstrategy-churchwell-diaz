@@ -4,9 +4,6 @@ your-repo/
 │   ├── main.py          ← FastAPI with /predict /health /metrics
 │   └── models.py        ← Loads model + defines Pydantic schemas
 │
-├── src/
-│   └── option_b.py      ← Data loader and model trainer
-|
 ├── batch_infer.py       ← Batch inference
 ├── models/
 │   └── diabetes_ridge.joblib
@@ -18,6 +15,8 @@ your-repo/
 ├── screenshots/
 │   └── metrics.png
 │
-├── Dockerfile
+├── dockerfile
 ├── requirements.txt
 ├── README.md
+├── eval_partner_a.py
+├── eval_partner_b.py
