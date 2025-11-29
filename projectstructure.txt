@@ -1,0 +1,23 @@
+your-repo/
+├── app/
+│   ├── __init__.py
+│   ├── main.py          ← FastAPI with /predict /health /metrics
+│   └── models.py        ← Loads model + defines Pydantic schemas
+│
+├── src/
+│   └── option_b.py      ← Data loader and model trainer
+|
+├── batch_infer.py       ← Batch inference
+├── models/
+│   └── diabetes_ridge.joblib
+│
+├── data/
+│   ├── input.csv
+│   └── predictions.csv
+│
+├── screenshots/
+│   └── metrics.png
+│
+├── Dockerfile
+├── requirements.txt
+├── README.md
