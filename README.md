@@ -2,8 +2,6 @@
   <img src="assets/cJtc.png" alt="Justice Through Code Banner" width="500"/>
 </p>
 
-
-
 <h1 align="center">🧪 AISE Week 9 — Split Strategy Showdown</h1>
 <h3 align="center">Team: Andrea Churchwell & Jose Diaz</h3>
 
@@ -15,21 +13,30 @@
   <img src="https://img.shields.io/badge/Metric-R²-success?style=for-the-badge"/>
 </p>
 
+---
+
 ## ❤️ Why We Chose the Diabetes Dataset
 
-We selected the Diabetes Regression dataset (#7) not just because it fits the Week 9 assignment requirements, but because the topic is personally meaningful to both of us. José's mother, Mrs. Isabel Diaz, has lived with diabetes for years, and Andrea’s beloved cocker spaniel, Ace, also developed diabetes later in life. Working with this dataset feels more impactful and motivating since it represents a condition that has touched both of our lives. Even though this is a simple machine learning evaluation assignment, using a dataset connected to real people (and pets) we care about makes the project feel more grounded and important.
+We selected the Diabetes Regression dataset (#7) because it fits the assignment requirements and it carries personal meaning for both of us. José's mother has diabetes, and Andrea’s cocker spaniel, Ace, developed diabetes later in life. Even though this is a technical evaluation project, using a dataset connected to real life makes the work feel more grounded and motivating.
 
 ---
 
 ## 📌 Project Overview
-This repository contains our team implementation for the AISE 26 W9D1 Split Strategy Showdown.
-Our goal is to compare different evaluation strategies on the same dataset, using the same model and the same metric, and analyze how each strategy impacts stability, variance, and trustworthiness.
 
-We are now mid-way through Part A development, with the environment fully working and Partner A’s Jupyter workflow set up correctly.
+This repository contains our team implementation for the **AISE 26 W9D1 Split Strategy Showdown**.  
+Our goal is to compare two evaluation strategies using:
+
+- the **same dataset**
+- the **same model** (Ridge Regression)
+- the **same metric** (R²)
+- and produce a clear comparison + recommendation report.
+
+Currently, **Partner A (Andrea)** has completed all required evaluation steps, including visuals and CSV results.
 
 ---
 
 ## 🔧 Tech Stack
+
 <p align="center">
   <img src="https://img.shields.io/badge/Python-3.12-blue?style=for-the-badge&logo=python&logoColor=white"/>
   <img src="https://img.shields.io/badge/scikit--learn-1.7.2-F7931E?style=for-the-badge&logo=scikitlearn&logoColor=white"/>
@@ -37,102 +44,93 @@ We are now mid-way through Part A development, with the environment fully workin
   <img src="https://img.shields.io/badge/NumPy-2.3.5-013243?style=for-the-badge&logo=numpy&logoColor=white"/>
   <img src="https://img.shields.io/badge/Jupyter-Notebook-F37626?style=for-the-badge&logo=jupyter&logoColor=white"/>
   <img src="https://img.shields.io/badge/VS%20Code-007ACC?style=for-the-badge&logo=visualstudiocode&logoColor=white"/>
-  <img src="https://img.shields.io/badge/Machine%20Learning-Evaluation-brightgreen?style=for-the-badge"/>
 </p>
 
+---
 
 ## ✅ Current Progress
 
-### ✔ Repository + Structure Ready
-- GitHub repo initialized  
-- .gitignore created  
-- Required scaffold files added:
-  - TEAM_INFO.md
-  - eval_partner_a.py
-  - eval_partner_b.py
-  - comparison.csv
-  - RECOMMENDATION.md
+### ✔ Repository Setup
+- Repo initialized  
+- `.gitignore` created  
+- Required W9D1 assignment files added  
+- Project structure cleaned and simplified
 
 ### ✔ Virtual Environment Working
-- venv/ successfully created  
-- All dependencies installed  
-- Jupyter kernel connected inside VS Code (aise_w9d1_venv)
+- venv created  
+- Dependencies installed  
+- Jupyter kernel connected (`aise_w9d1_venv`)
 
-### ✔ Jupyter Notebook Working
-- partner_a_notebook.ipynb created  
-- Imports, dataset loading, splitting all verified working
+### ✔ Dataset & Metric
+- **Dataset:** Diabetes Regression (#7)  
+- **Metric:** **R²** (coefficient of determination)
 
-### ✔ Dataset Selected
-**Dataset #7 — Diabetes Regression Dataset**
+### ✔ Partner A (Andrea) — Completed
+- Loaded dataset  
+- Built Ridge Regression + StandardScaler pipeline  
+- 80/20 Random Holdout complete  
+- 5-Fold CV complete  
+- All scores printed  
+- Plotly visuals generated  
+- `comparison.csv` updated with Partner A results  
+- Internal notes completed (dataset, model, scaling, R² analysis)
 
-### ✔ Metric Selected
-**R² (Coefficient of Determination)**
+### ⏳ Partner B (Jose) — Pending
+- Implement stratified/time-aware split (if applicable)  
+- Run model + metric  
+- Add results to `comparison.csv`
 
-### ✔ Partner A Code Completed (Functionally)
-- Data loaded and explored  
-- 80/20 Random Holdout implemented  
-- Ridge Regression + StandardScaler pipeline  
-- Test R² score printed  
-- 5-fold KFold CV implemented  
-- CV mean + std printed  
+### ⏳ TEAM_INFO.md — Pending Finalization
+
+### ⏳ RECOMMENDATION.md — Pending (after Partner B completes part)
+---
+
+## 📂 Project Structure
+```
+├── assets/
+│ ├── cJtc.png
+│ └── jtc.png
+├── data/
+├── partner_a_visuals/
+├── eval_partner_a.py
+├── eval_partner_b.py
+├── comparison.csv
+├── TEAM_INFO.md
+├── RECOMMENDATION.md
+├── partner_a_notebook.ipynb
+└── README.md
+```
 
 ---
 
-## ⏳ Next Steps
-### 🔸 1. Partner B (José)
-Implement evaluation using:
-- same dataset  
-- same metric (R²)  
-- stratified or specialized CV (based on assignment instructions)
+## 🚀 Next Steps
 
-### 🔸 2. Fill in TEAM_INFO.md
-Add:
-- names & roles  
-- dataset (#7)  
-- metric (R²)  
-- why we chose this dataset  
-- code block for loading diabetes dataset  
-- package versions
+### 🔸 Partner B
+- Implement stratified or specialized CV  
+- Use **same model + metric**  
+- Add results to `comparison.csv`
 
-### 🔸 3. Populate comparison.csv
-After both scripts run, record:
-- test score  
-- CV mean  
-- CV std  
-- fold-by-fold results  
-for Partner A and Partner B.
+### 🔸 TEAM_INFO.md
+- Add team names  
+- Add roles (A = random holdout, B = stratified/time-aware)  
+- Add dataset info & loading code  
+- Add agreed-upon metric  
+- Add package versions
 
-### 🔸 4. Write RECOMMENDATION.md
-Final 200–250 word analysis comparing:
-- variance  
-- stability  
-- leakage risk  
-- which strategy we'd trust  
-
----
-
-## 🚀 Project Status
-
-| Step                     | Status      |
-|--------------------------|------------ |
-| Repo created             | ✅ Done    |
-| venv + requirements.txt  | ✅ Done    |
-| Jupyter kernel fixed     | ✔️ Done    |
-| Dataset selected (#7)    | ✔️ Done    |
-| Metric selected (R²)     | ✔️ Done    |
-| Partner A code           | ✔️ Done    |
-| Partner B code           | ⏳ Pending |
-| comparison.csv           | ⏳ Pending |
-| TEAM_INFO.md             | ⏳ Pending |
-| RECOMMENDATION.md        | ⏳ Pending |
-
+### 🔸 RECOMMENDATION.md
+- Analyze variance  
+- Compare stability  
+- Discuss leakage risks  
+- Give final recommendation (200–250 words)
 
 ---
 
 ## 📝 Notes
 
-This README will continue evolving as we finalize the dataset and metric and begin implementing the required evaluation strategies.
+This README will continue to evolve as the assignment progresses.  
+Once Partner B completes his portion, we will finalize the comparison and recommendation.
 
+---
 
 <p align="center"><i>Built with ❤️ by Andrea & Jose • JTC AISE 2025</i></p>
 <p align="center">
