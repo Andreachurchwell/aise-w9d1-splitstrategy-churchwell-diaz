@@ -1,16 +1,9 @@
 """
 AISE 26 - W9D1 Split Strategy Showdown
-Partner B: Stratified Holdout + Stratified 5-Fold CV
+Partner B: Ordered Holdout + 5-Fold Time-Aware CV
 Author: Jose Diaz
 Dataset: Diabetes Progression (#7)
 Metric: R²
-
-NOTE:
-The diabetes dataset is regression, so true stratification is impossible.
-Partner B requirement: stratified OR time-aware CV.
-Solution:
-    • Bin continuous target y into 5 quantile bins
-    • Use stratified split + StratifiedKFold on binned labels
 """
 
 import os
@@ -18,11 +11,14 @@ import numpy as np
 import pandas as pd
 
 from sklearn.datasets import load_diabetes
-from sklearn.model_selection import StratifiedKFold, train_test_split, cross_val_score
-from sklearn.preprocessing import StandardScaler
-from sklearn.pipeline import Pipeline
+from sklearn.model_selection import train_test_split, KFold
 from sklearn.linear_model import Ridge
+from sklearn.pipeline import Pipeline
+from sklearn.preprocessing import StandardScaler
 from sklearn.metrics import r2_score
+
+# Optional visualizations (Partner B extra credit)
+import plotly.express as px
 
 from rich.console import Console
 
@@ -30,136 +26,151 @@ RANDOM_STATE = 42
 np.random.seed(RANDOM_STATE)
 
 
-def bin_target(y, bins=5):
+def generate_partner_b_visuals(y_test, y_pred_test, cv_scores):
     """
-    Convert continuous regression target into discrete bins
-    so we can perform stratification.
+    Partner B Plotly visualizations saved under partner_b_visuals/
     """
-    return pd.qcut(y, q=bins, labels=False, duplicates="drop")
+    os.makedirs("partner_b_visuals", exist_ok=True)
+
+    # --- 1. CV Bar Chart ---
+    cv_df = pd.DataFrame({
+        "Fold": ["Fold 1", "Fold 2", "Fold 3", "Fold 4", "Fold 5"],
+        "R² Score": cv_scores
+    })
+
+    fig_cv = px.bar(
+        cv_df,
+        x="Fold",
+        y="R² Score",
+        title="Partner B – 5-Fold Time-Aware CV R²",
+        text="R² Score",
+        color="R² Score",
+        color_continuous_scale="Bluered"
+    )
+    fig_cv.update_traces(texttemplate='%{text:.3f}', textposition='outside')
+    fig_cv.write_html("partner_b_visuals/cv_r2_bar_chart.html")
+
+    # --- 2. Actual vs Predicted Scatter ---
+    test_df = pd.DataFrame({
+        "Actual": y_test.reset_index(drop=True),
+        "Predicted": pd.Series(y_pred_test).reset_index(drop=True)
+    })
+
+    fig_scatter = px.scatter(
+        test_df,
+        x="Actual",
+        y="Predicted",
+        title="Partner B – Actual vs Predicted (Test Set)",
+        opacity=0.7,
+    )
+    fig_scatter.write_html("partner_b_visuals/actual_vs_pred_scatter.html")
+
+    # --- 3. Residual Histogram ---
+    residuals = y_pred_test - y_test.reset_index(drop=True)
+
+    fig_resid = px.histogram(
+        residuals,
+        nbins=30,
+        title="Partner B – Residual Distribution (Test Set)"
+    )
+    fig_resid.write_html("partner_b_visuals/residual_histogram.html")
 
 
 def main():
     console = Console()
-    console.print("\n[bold magenta]=== Partner B – Stratified Evaluation Pipeline ===[/bold magenta]")
 
-    # ----------------------------------------
-    # Step 1: Load Dataset
-    # ----------------------------------------
+    console.print("\n[bold magenta]=== Partner B – Evaluation Pipeline ===[/bold magenta]")
+    console.print("[bold cyan]AISE 26 - W9D1 Split Strategy Showdown[/bold cyan]")
+    console.print("[white]Partner B: Ordered Holdout + Time-Aware CV (KFold, shuffle=False)[/white]\n")
+
+    # --------------------------------------------
+    # Step 1 – Load Dataset
+    # --------------------------------------------
     data = load_diabetes(as_frame=True)
     X = data.data
     y = data.target
 
-    console.print("\n[bold cyan]📥 Loading Diabetes dataset (#7)[/bold cyan]")
-    console.print(f"[yellow]X shape: {X.shape}[/yellow]")
-    console.print(f"[yellow]y shape: {y.shape}[/yellow]")
+    # --------------------------------------------
+    # Step 2 – Ordered Holdout Split (NOT random)
+    # --------------------------------------------
+    # Equivalent to time-aware split: first 80% train, last 20% test
+    split_idx = int(len(X) * 0.8)
 
-    # ----------------------------------------
-    # Step 2: Create Binned y for Stratification
-    # ----------------------------------------
-    console.print("\n[bold cyan]📊 Creating 5-bin stratified target labels...[/bold cyan]")
-    y_binned = bin_target(y, bins=5)
+    X_train = X.iloc[:split_idx]
+    y_train = y.iloc[:split_idx]
 
-    # ----------------------------------------
-    # Step 3: Stratified 80/20 Split
-    # ----------------------------------------
-    console.print("\n[bold cyan]🧪 Stratified 80/20 Train/Test Split...[/bold cyan]")
+    X_test = X.iloc[split_idx:]
+    y_test = y.iloc[split_idx:]
 
-    X_train, X_test, y_train, y_test, train_bins, test_bins = train_test_split(
-        X,
-        y,
-        y_binned,
-        test_size=0.2,
-        random_state=RANDOM_STATE,
-        stratify=y_binned
-    )
+    console.print(f"[yellow]Holdout strategy: First 80% → Train, Last 20% → Test[/yellow]")
+    console.print(f"[yellow]X_train: {X_train.shape}, X_test: {X_test.shape}[/yellow]\n")
 
-    console.print("[green]✔ Stratified split successful.[/green]")
-    console.print(f"X_train shape: {X_train.shape}")
-    console.print(f"X_test  shape: {X_test.shape}")
-
-    # ----------------------------------------
-    # Step 4: Build Pipeline (Scaler + Ridge)
-    # ----------------------------------------
-    console.print("\n[bold cyan]🧠 Training Ridge Regression model...[/bold cyan]")
-
+    # --------------------------------------------
+    # Step 3 – Build Pipeline
+    # --------------------------------------------
     model = Pipeline([
         ("scaler", StandardScaler()),
         ("ridge", Ridge())
     ])
 
     model.fit(X_train, y_train)
-    console.print("[green]✔ Model trained.[/green]")
 
-    # ----------------------------------------
-    # Step 5: Training R²
-    # ----------------------------------------
+    # --------------------------------------------
+    # Step 4 – Train/Test Performance
+    # --------------------------------------------
     y_pred_train = model.predict(X_train)
-    train_r2 = r2_score(y_train, y_pred_train)
-
-    # ----------------------------------------
-    # Step 6: Test R² on the 20% holdout set
-    # ----------------------------------------
     y_pred_test = model.predict(X_test)
+
+    train_r2 = r2_score(y_train, y_pred_train)
     test_r2 = r2_score(y_test, y_pred_test)
 
-    console.print("\n[bold cyan]📘 Performance Results[/bold cyan]")
-    console.print(f"Train R²: {train_r2:.4f}")
-    console.print(f"Test R² : {test_r2:.4f}")
+    console.print(f"[green]Train R²: {train_r2:.4f}[/green]")
+    console.print(f"[green]Test  R²: {test_r2:.4f}[/green]\n")
 
-    # ----------------------------------------
-    # Step 7: Stratified 5-Fold CV (on training set only)
-    # ----------------------------------------
-    console.print("\n[bold cyan]📚 Running Stratified 5-Fold CV...[/bold cyan]")
+    # --------------------------------------------
+    # Step 5 – Time-Aware CV (KFold, shuffle=False)
+    # --------------------------------------------
+    kf = KFold(n_splits=5, shuffle=False)
 
-    skf = StratifiedKFold(
-        n_splits=5,
-        shuffle=True,
-        random_state=RANDOM_STATE
-    )
+    cv_scores = []
+    for train_idx, val_idx in kf.split(X_train):
+        X_tr, X_val = X_train.iloc[train_idx], X_train.iloc[val_idx]
+        y_tr, y_val = y_train.iloc[train_idx], y_train.iloc[val_idx]
 
-    cv_scores = cross_val_score(
-        model,
-        X_train,
-        y_train,
-        cv=skf,
-        scoring="r2"
-    )
+        model.fit(X_tr, y_tr)
+        preds = model.predict(X_val)
 
-    cv_mean = cv_scores.mean()
-    cv_std = cv_scores.std()
+        cv_scores.append(r2_score(y_val, preds))
 
-    console.print("\n--- 5-Fold CV Results (Partner B) ---")
+    cv_scores = np.array(cv_scores)
+
+    console.print("[cyan]--- 5-Fold Ordered CV Results (Partner B) ---[/cyan]")
     console.print(f"Fold scores: {cv_scores}")
-    console.print(f"CV Mean R²: {cv_mean:.4f}")
-    console.print(f"CV Std  R²: {cv_std:.4f}")
+    console.print(f"CV Mean R²: {cv_scores.mean():.4f}")
+    console.print(f"CV Std  R²: {cv_scores.std():.4f}\n")
 
-    # ----------------------------------------
-    # Step 8: Summary Output
-    # ----------------------------------------
-    console.print("\n✨ Partner B Summary")
-    console.print(f"📘 Train R²   : {train_r2:.4f}")
-    console.print(f"📗 Test R²    : {test_r2:.4f}")
-    console.print(f"📙 CV Mean R² : {cv_mean:.4f}")
-    console.print(f"📒 CV Std R²  : {cv_std:.4f}")
-
-    # ----------------------------------------
-    # Step 9: Append results to comparison.csv
-    # ----------------------------------------
-    comp_path = "comparison.csv"
-
-    comp_df = pd.DataFrame({
-        "strategy": ["partner_b"] * len(cv_scores),
+    # --------------------------------------------
+    # Step 6 – Save to comparison.csv
+    # --------------------------------------------
+    df_out = pd.DataFrame({
+        "strategy": ["partner_b"] * 5,
         "fold": [1, 2, 3, 4, 5],
         "score": cv_scores
     })
 
-    if not os.path.exists(comp_path):
-        comp_df.to_csv(comp_path, index=False)
+    if not os.path.exists("comparison.csv"):
+        df_out.to_csv("comparison.csv", index=False)
     else:
-        comp_df.to_csv(comp_path, mode="a", index=False, header=False)
+        df_out.to_csv("comparison.csv", mode="a", header=False, index=False)
 
-    console.print("\n✔ Appended Partner B scores to comparison.csv")
-    console.print("🎉 Partner B evaluation complete!\n")
+    console.print("[green]✔ Appended Partner B scores to comparison.csv[/green]\n")
+
+    # --------------------------------------------
+    # Step 7 – Visualizations
+    # --------------------------------------------
+    generate_partner_b_visuals(y_test, y_pred_test, cv_scores)
+
+    console.print("[bold green]🎉 Partner B evaluation complete![/bold green]\n")
 
 
 if __name__ == "__main__":
