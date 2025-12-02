@@ -11,11 +11,12 @@ import numpy as np
 import pandas as pd
 
 from sklearn.datasets import load_diabetes
-from sklearn.model_selection import train_test_split, KFold
+from sklearn.model_selection import train_test_split, TimeSeriesSplit
 from sklearn.linear_model import Ridge
 from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import StandardScaler
 from sklearn.metrics import r2_score
+
 
 # Optional visualizations (Partner B extra credit)
 import plotly.express as px
@@ -128,12 +129,13 @@ def main():
     console.print(f"[green]Test  R²: {test_r2:.4f}[/green]\n")
 
     # --------------------------------------------
-    # Step 5 – Time-Aware CV (KFold, shuffle=False)
+    # Step 5 – TimeSeriesSplit 
     # --------------------------------------------
-    kf = KFold(n_splits=5, shuffle=False)
+    
+    tscv = TimeSeriesSplit(n_splits=5)
 
     cv_scores = []
-    for train_idx, val_idx in kf.split(X_train):
+    for train_idx, val_idx in tscv.split(X_train):
         X_tr, X_val = X_train.iloc[train_idx], X_train.iloc[val_idx]
         y_tr, y_val = y_train.iloc[train_idx], y_train.iloc[val_idx]
 
@@ -141,10 +143,10 @@ def main():
         preds = model.predict(X_val)
 
         cv_scores.append(r2_score(y_val, preds))
-
+    
     cv_scores = np.array(cv_scores)
 
-    console.print("[cyan]--- 5-Fold Ordered CV Results (Partner B) ---[/cyan]")
+    console.print("[cyan]--- 5-Fold TimeSeriesSplit Results (Partner B) ---[/cyan]")
     console.print(f"Fold scores: {cv_scores}")
     console.print(f"CV Mean R²: {cv_scores.mean():.4f}")
     console.print(f"CV Std  R²: {cv_scores.std():.4f}\n")
