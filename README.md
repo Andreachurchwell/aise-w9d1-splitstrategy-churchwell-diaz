@@ -90,7 +90,6 @@ Currently, **Partner A (Andrea)** has completed all required evaluation steps, i
 ├── assets/
 │ ├── cJtc.png
 │ └── jtc.png
-├── data/
 ├── partner_a_visuals/
 ├── eval_partner_a.py
 ├── eval_partner_b.py
