@@ -153,44 +153,37 @@ Open these two images side by side in VS Code to visually confirm the difference
 
 ---
 
-## 5. Visual Notes  
+## 5. Visual Notes
 
-You created PNG screenshots for both partners:  
+Below are the screenshots for both partners, embedded directly into the document.
 
-- CV bar charts  
-  - `assets/partner_a_cvr2.png`  
-  - `assets/partner_b_cvr2.png`  
+### 5.1 Cross-Validation Bar Charts
 
-- Actual vs Predicted scatterplots  
-  - `assets/partner_a_actual_vs_pred.png`  
-  - `assets/partner_b_actual_vs_pred.png`  
+**Partner A – 5-Fold CV R²**
+![Partner A CV Bar Chart](assets/partner_a_cvr2.png)
 
-- Residual histograms  
-  - `assets/partner_a_residuals.png`  
-  - `assets/partner_b_residuals.png`  
+**Partner B – 5-Fold CV R²**
+![Partner B CV Bar Chart](assets/partner_b_cvr2.png)
 
-### 5.1 CV Bar Charts  
+---
 
-- **Partner A:** bars are tightly grouped between ~0.41 and ~0.54.  
-- **Partner B:** bars swing from ~0.28 to ~0.58.  
+### 5.2 Actual vs Predicted Scatterplots
 
-This visually reinforces the numeric variances (0.04 vs 0.13).  
+**Partner A – Actual vs Predicted**
+![Partner A Actual vs Predicted](assets/partner_a_actual_vs_pred.png)
 
-### 5.2 Actual vs Predicted  
+**Partner B – Actual vs Predicted**
+![Partner B Actual vs Predicted](assets/partner_b_actual_vs_pred.png)
 
-- **Partner A:**  
-  - Scatter points roughly follow an upward trend.  
-  - Includes a dashed red trendline that shows the linear relationship.  
-  - Points are somewhat spread but follow the line reasonably well.  
+---
 
-- **Partner B:**  
-  - Scatter also trends upward, but points appear more scattered.  
-  - No trendline in this plot, but the general pattern is noisier.  
+### 5.3 Residual Histograms
 
-### 5.3 Residuals  
+**Partner A – Residual Distribution**
+![Partner A Residuals](assets/partner_a_residuals.png)
 
-- **Partner A residuals:** more tightly clustered around 0, indicating more consistent prediction errors.  
-- **Partner B residuals:** wider spread, matching the higher fold-to-fold variance from TimeSeriesSplit.  
+**Partner B – Residual Distribution**
+![Partner B Residuals](assets/partner_b_residuals.png)
 
 ---
 
