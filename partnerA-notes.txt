@@ -155,3 +155,148 @@ Random 80/20 splitting is safe for this dataset because there is no time compone
 ----
 
 
+Partner B Notes — José Diaz
+(Ordered Holdout + Time-Aware CV)
+✅ Dataset Details
+
+Dataset: Diabetes Regression (load_diabetes)
+Samples: 442
+Features: 10 numeric
+Task Type: Regression
+Metric: R²
+Random State: Not applicable for Partner B since the split is ordered (no randomness)
+
+📌 What This Dataset Represents
+Same as Partner A — both partners must use identical data.
+The diabetes dataset predicts a continuous progression score based on 10 medical features like BMI, blood pressure, and age. It’s small and noisy, which makes evaluation very sensitive to how the data is split. That sensitivity explains why Partner B’s folds bounce around more than Partner A’s.
+
+--------------------------------------------
+🟦 Partner B Strategy Overview
+
+Partner B’s job is to simulate a time-aware evaluation pipeline:
+
+✔ Ordered Train/Test Holdout (first 80% → train, last 20% → test)
+✔ Time-Aware Cross Validation using TimeSeriesSplit
+✔ Same model (Ridge Regression) and same scaler (StandardScaler in a Pipeline)
+✔ Same metric (R²)
+
+Even though the dataset is not truly time series, the assignment requires Partner B to practice a “future-aware” strategy to compare its behavior against random shuffle.
+
+This creates real, noticeable differences in score stability.
+
+--------------------------------------------
+
+🟦 Why Ordered 80/20 Holdout?
+
+Partner B uses:
+X_train = first 80% of rows  
+X_test = last 20% of rows
+
+No shuffling. No randomness.
+This simulates “train on the past → predict the future.”
+
+This matters because:
+If the dataset had seasonality or trending patterns, this avoids leakage.
+But this dataset does not have time patterns → so the split becomes “harsher” for no real benefit.
+The model gets stuck with whatever patterns appear in the last 20% of the dataset.
+👉 Result: More score volatility and less stability.
+
+--------------------------------------------
+🟦 Model: Ridge Regression Pipeline
+
+Same as Partner A.
+Ridge regression is chosen because:
+The dataset is noisy
+Features are correlated
+Ridge reduces overfitting
+The pipeline ensures scaling happens safely per fold (no leakage)
+
+--------------------------------------------
+🟦 Train/Test Performance
+The outputs José printed:
+Train R²: 0.5088
+Test R²: 0.5413
+
+🧠 How To Interpret This:
+His train R² (0.5088) is very similar to yours (0.5276)
+His test R² (0.5413) is higher than his train score
+That’s unusual but not an error — it can happen in small datasets
+Why?
+Because:
+The final 20% of the dataset (his test slice) may be easier than earlier rows
+Ordered splits can accidentally create “lucky” test sets or “harsh” train sets
+
+No randomness means the model isn’t statistically balanced
+👉 His test score being higher doesn’t mean his method is superior.
+It means the last rows happened to match the model’s learned patterns better.
+
+--------------------------------------------
+
+🟦 TimeSeriesSplit – 5-Fold Time-Aware CV
+Partner B uses:
+TimeSeriesSplit(n_splits=5)
+This creates folds where:
+The training portion always comes first
+The validation portion is always later
+More realistic for true temporal prediction
+
+Much more unstable for datasets with no time dimension
+
+📊 Partner B Fold Scores:
+0.2984
+0.5760
+0.2785
+0.5831
+0.4492
+
+✔ CV Mean: 0.4373
+✔ CV Std: 0.1305
+
+🧠 How To Interpret These Numbers
+📉 Huge variability
+Lowest fold: 0.27
+Highest fold: 0.58
+Std Dev = 0.13 → large swings
+
+This tells you:
+The dataset behaves very differently depending on which “time chunk” it sees
+Since the dataset isn’t temporal, these swings come from noise
+
+TimeSeriesSplit pushes the model into unstable territory unnecessarily
+📌 This is the expected behavior of TimeSeriesSplit on a non-time dataset.
+It’s not a mistake. It’s simply less appropriate for this dataset.
+
+--------------------------------------------
+🟦 Understanding Why Partner B Performs This Way
+
+Partner B’s method:
+✔ Avoids any chance of temporal leakage
+✔ Is better for forecasting-style datasets
+✖ Is less reliable for small, non-time datasets
+✖ Produces higher variance
+✖ Often gives lower average performance
+
+In your comparison:
+Partner B’s strategy is more “real-world time-aware,”
+but less appropriate for the Diabetes dataset → which has no temporal structure.
+
+--------------------------------------------
+🟦 Visualizations 
+José generates three Plotly visuals:
+5-Fold Time-Aware CV Bar Chart
+
+Shows the dramatic differences between folds
+Actual vs Predicted Scatter (Test Set)
+
+Tests the relationship between predicted and true values
+Residual Histogram
+Helps visualize prediction error distribution
+
+These visuals are correct, helpful, and match the assignment's “storytelling” suggestions.
+
+--------------------------------------------
+🟦 Summary 
+
+Partner B’s ordered holdout and TimeSeriesSplit approach produced a mean R² of 0.4373 with high fold-to-fold variance (std = 0.1305). This evaluation strategy simulates realistic forecasting conditions, where models train on earlier data and predict future observations. However, since the diabetes dataset is not temporal, this method introduces unnecessary instability. Partner B’s test R² (0.5413) was slightly higher than the train R² (0.5088), likely due to the final 20% of the dataset being easier for the model. Overall, Partner B’s approach is correct for time-aware evaluation, but less appropriate for this particular dataset compared to Partner A’s randomized approach.
+
+--------------------------------------------

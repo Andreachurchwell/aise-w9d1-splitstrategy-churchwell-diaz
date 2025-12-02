@@ -20,6 +20,13 @@ The goal is to:
 
 ---
 
+### 🔍 Executive Summary
+- Partner A's Random Holdout + KFold produced more stable and higher average R² scores.
+- Partner B's TimeSeriesSplit had much higher variance due to the dataset not being temporal.
+- Visuals confirm that Partner A’s model generalizes more consistently (residuals, scatterplots, CV).
+- Recommendation: Use Partner A’s approach for this dataset; Partner B’s approach fits true time series.
+
+
 ## 1. Dataset Overview  
 
 - **Name:** Diabetes Regression (`sklearn.datasets.load_diabetes`)  
@@ -153,12 +160,33 @@ Open these two images side by side in VS Code to visually confirm the difference
 
 ---
 
-## 5. Visual Notes
+## 5. Visual Comparisons
+Below are our key visuals and interpretations for both strategies.
 
 Below are the screenshots for both partners, embedded directly into the document.
 
 ## 5.1 Cross-Validation Bar Charts (Side-by-Side)
+### What We’re Looking At (Cross-Validation)
 
+- **Each bar = one fold of cross-validation** (5 total).
+- Higher bars = better model performance.
+- Differences in bar height = how “stable” the model is across different slices of data.
+
+**Partner A (Random KFold):**
+- Bars are grouped tightly together.
+- Scores range from ~0.41 to ~0.54.
+- Very small variance (std ≈ 0.04).
+- This means **the model behaves consistently** no matter how the data is split.
+
+**Partner B (TimeSeriesSplit):**
+- Bars swing dramatically between folds.
+- Scores range from ~0.27 to ~0.58.
+- Very large variance (std ≈ 0.13).
+- This means the model is **unstable** under the time-aware split (because the dataset is NOT temporal).
+
+**Interpretation:**
+- Partner A’s strategy is more reliable and predictable.
+- Partner B’s strategy introduces unnecessary instability for this dataset.
 <table>
 <tr>
 <td>
@@ -172,9 +200,33 @@ Below are the screenshots for both partners, embedded directly into the document
 </td>
 </tr>
 </table>
+**Summary:** Partner A’s folds show tight, consistent performance, while Partner B’s folds swing dramatically, proving that KFold gives much more stable estimates for this dataset.
 
 ---
 ## 5.2 Actual vs Predicted
+### What We’re Looking At (Actual vs Predicted)
+
+These scatterplots show:
+- **X-axis = actual disease progression**
+- **Y-axis = model’s predicted score**
+
+A perfect model would have all points lying exactly on a diagonal “match” line.
+
+**Partner A:**
+- Upward trend is more visible.
+- Points cluster more tightly around the dashed trendline.
+- This indicates the model is capturing the linear relationship reasonably well.
+- Still some noise — expected for this small dataset.
+
+**Partner B:**
+- The upward trend is still there but the spread of points is wider.
+- Without the trendline, it's clear the relationship is noisier.
+- This reflects the higher variance observed in cross-validation.
+
+**Interpretation:**
+- Both models learn the general pattern.
+- Partner A has slightly better alignment with actual values.
+- Partner B displays more scatter (less consistent predictions).
 
 <table>
 <tr>
@@ -189,10 +241,31 @@ Below are the screenshots for both partners, embedded directly into the document
 </td>
 </tr>
 </table>
+**Summary:** Both partners capture the general trend, but Partner A’s predictions align more closely with actual values, showing a cleaner and more reliable linear relationship.
 
 ---
 
 ## 5.3 Residual Histograms
+### What We’re Looking At (Residuals)
+
+Residual = (Predicted − Actual).  
+A good model has residuals clustered around **0**, meaning predictions are close to reality.
+
+**Partner A:**
+- Residuals are more tightly centered.
+- Histogram shape is smoother.
+- Fewer extreme errors.
+- This matches the lower variance from the CV results.
+
+**Partner B:**
+- Residuals are more spread out.
+- More extreme prediction errors.
+- This reflects instability caused by the time-aware split.
+
+**Interpretation:**
+- Partner A’s model makes more consistent errors.
+- Partner B’s model has wider, less predictable error patterns.
+- Again, this supports the conclusion that KFold is the more appropriate strategy.
 
 <table>
 <tr>
@@ -207,6 +280,7 @@ Below are the screenshots for both partners, embedded directly into the document
 </td>
 </tr>
 </table>
+**Summary:** Partner A’s residuals cluster tightly around zero, while Partner B’s are more spread out, confirming that the time-aware split introduces greater prediction error.
 
 ---
 
