@@ -301,4 +301,4 @@ Because of that:
 
 **Final conclusion:**  
 
-> For the Diabetes Regression dataset, we recommend Partner A’s random holdout + KFold strategy as the primary evaluation method. Partner B’s ordered + time-aware approach is still valuable to understand and would be more appropriate for a true time series problem (e.g., forecasting over months or years), but it is less well-matched to this specific dataset.
+> For the Diabetes Regression dataset, I recommend Partner A’s random holdout + KFold strategy as the primary evaluation method. Partner B’s ordered + time-aware approach is still valuable to understand and would be more appropriate for a true time series problem (e.g., forecasting over months or years), but it is less well-matched to this specific dataset.
