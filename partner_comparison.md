@@ -157,33 +157,56 @@ Open these two images side by side in VS Code to visually confirm the difference
 
 Below are the screenshots for both partners, embedded directly into the document.
 
-### 5.1 Cross-Validation Bar Charts
+## 5.1 Cross-Validation Bar Charts (Side-by-Side)
 
-**Partner A – 5-Fold CV R²**
-![Partner A CV Bar Chart](assets/partner_a_cvr2.png)
+<table>
+<tr>
+<td>
+<strong>Partner A – 5-Fold CV R²</strong><br>
+<img src="assets/partner_a_cvr2.png" width="430">
+</td>
 
-**Partner B – 5-Fold CV R²**
-![Partner B CV Bar Chart](assets/partner_b_cvr2.png)
+<td>
+<strong>Partner B – 5-Fold CV R²</strong><br>
+<img src="assets/partner_b_cvr2.png" width="430">
+</td>
+</tr>
+</table>
+
+---
+## 5.2 Actual vs Predicted
+
+<table>
+<tr>
+<td>
+<strong>Partner A – Actual vs Predicted</strong><br>
+<img src="assets/partner_a_actual_vs_pred.png" width="430">
+</td>
+
+<td>
+<strong>Partner B – Actual vs Predicted</strong><br>
+<img src="assets/partner_b_actual_vs_pred.png" width="430">
+</td>
+</tr>
+</table>
 
 ---
 
-### 5.2 Actual vs Predicted Scatterplots
+## 5.3 Residual Histograms
 
-**Partner A – Actual vs Predicted**
-![Partner A Actual vs Predicted](assets/partner_a_actual_vs_pred.png)
+<table>
+<tr>
+<td>
+<strong>Partner A – Residual Histogram</strong><br>
+<img src="assets/partner_a_residuals.png" width="430">
+</td>
 
-**Partner B – Actual vs Predicted**
-![Partner B Actual vs Predicted](assets/partner_b_actual_vs_pred.png)
-
----
-
-### 5.3 Residual Histograms
-
-**Partner A – Residual Distribution**
-![Partner A Residuals](assets/partner_a_residuals.png)
-
-**Partner B – Residual Distribution**
-![Partner B Residuals](assets/partner_b_residuals.png)
+<td>
+<strong>Partner B – Residual Histogram</strong><br>
+<img src="assets/partner_b_residuals.png" width="430">
+</td>
+</tr>
+</table>
 
 ---
 
