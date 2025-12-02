@@ -1,2 +1,2 @@
 Andrea Churchwell - Did option A
-Jose Diaz - Option B
+Jose Diaz - Did option B

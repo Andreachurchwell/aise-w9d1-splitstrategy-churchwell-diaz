@@ -8,7 +8,7 @@
 <h3 align="center">Team: Andrea Churchwell & Jose Diaz</h3>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/AISE-2025-blueviolet?style=for-the-badge"/>
+  <img src="https://img.shields.io/badge/AISE-2026-blueviolet?style=for-the-badge"/>
   <img src="https://img.shields.io/badge/Week-9-informational?style=for-the-badge"/>
   <img src="https://img.shields.io/badge/Status-In%20Progress-yellow?style=for-the-badge"/>
   <img src="https://img.shields.io/badge/Dataset-Diabetes-orange?style=for-the-badge"/>
@@ -121,7 +121,7 @@ Final 200–250 word analysis comparing:
 | Dataset selected (#7)    | ✔️ Done    |
 | Metric selected (R²)     | ✔️ Done    |
 | Partner A code           | ✔️ Done    |
-| Partner B code           | ⏳ Pending |
+| Partner B code           | ✔️ Done    |
 | comparison.csv           | ⏳ Pending |
 | TEAM_INFO.md             | ⏳ Pending |
 | RECOMMENDATION.md        | ⏳ Pending |
@@ -134,7 +134,7 @@ Final 200–250 word analysis comparing:
 This README will continue evolving as we finalize the dataset and metric and begin implementing the required evaluation strategies.
 
 
-<p align="center"><i>Built with ❤️ by Andrea & Jose • JTC AISE 2025</i></p>
+<p align="center"><i>Built with ❤️ by Andrea & Jose • JTC AISE 2026</i></p>
 <p align="center">
   <img src="assets/jtc.png" alt="JTC Icon" width="90"/>
 </p>
