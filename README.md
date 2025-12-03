@@ -39,8 +39,8 @@ We implemented:
 
 Both partners use the **same model & metric**, as required.
 
-## 📄 **Final Recommendation Report:**  
-## ➡️ See [RECOMMENDATION.md](RECOMMENDATION.md)
+###  📄 **Final Recommendation Report:**  
+###  ➡️ See [RECOMMENDATION.md](RECOMMENDATION.md)
 ---
 
 ## 🔧 Tech Stack
