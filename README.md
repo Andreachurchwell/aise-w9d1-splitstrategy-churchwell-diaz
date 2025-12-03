@@ -8,7 +8,7 @@
 <p align="center">
   <img src="https://img.shields.io/badge/AISE-2026-blueviolet?style=for-the-badge"/>
   <img src="https://img.shields.io/badge/Week-9-informational?style=for-the-badge"/>
-  <img src="https://img.shields.io/badge/Status-In%20Progress-yellow?style=for-the-badge"/>
+  <img src="https://img.shields.io/badge/Status-Completed-brightgreen?style=for-the-badge"/>
   <img src="https://img.shields.io/badge/Dataset-Diabetes-orange?style=for-the-badge"/>
   <img src="https://img.shields.io/badge/Metric-R²-success?style=for-the-badge"/>
 </p>
@@ -39,6 +39,8 @@ We implemented:
 
 Both partners use the **same model & metric**, as required.
 
+📄 **Final Recommendation Report:**  
+➡️ See [RECOMMENDATION.md](RECOMMENDATION.md)
 ---
 
 ## 🔧 Tech Stack
@@ -92,19 +94,16 @@ Both partners use the **same model & metric**, as required.
   - Residuals histogram
 - `comparison.csv` updated with Partner B metrics
 
-### 🧪 Partner Comparison – In Progress (Almost There)
+### 🧪 Recommendation Report – Completed
 
-- `partner_comparison.md` created to:
-  - Summarize both strategies
-  - Compare R² scores and CV variance
-  - Analyze residuals and prediction patterns
-  - Embed side-by-side chart screenshots from `assets/`
-- Final polish and word count checks will happen after RECOMMENDATION is finished.
+- `RECOMMENDATION.md` finalized and submitted  
+- Includes dataset summary, strategy comparison, variance analysis, data leakage, and final recommendation  
+- Visual comparisons included in the report and assets folder
 
 ### 📄 TEAM_INFO & RECOMMENDATION
 
-- `TEAM_INFO.md` – structure ready, content being finalized  
-- `RECOMMENDATION.md` – will be written after reviewing the final metrics + visuals together
+- `TEAM_INFO.md` – Completed  
+- `RECOMMENDATION.md` – Completed
 
 ---
 
@@ -132,7 +131,6 @@ Both partners use the **same model & metric**, as required.
 ├── TEAM_INFO.md                   # Team + dataset + metric info (per assignment)
 ├── RECOMMENDATION.md              # Final written recommendation report
 │
-├── partner_comparison.md          # Visual + narrative comparison (side-by-side charts)
 ├── partnerA-notes.txt             # Andrea’s working notes
 │
 ├── partner_a_notebook.ipynb       # (Optional) Jupyter notebook for exploration
@@ -178,17 +176,16 @@ python eval_partner_b.py
 ## 🚀 Project Status
 | Step                      | Status                        |
 | ------------------------- | ----------------------------- |
-| Repo created              | ✅ Done                        |
-| venv + `requirements.txt` | ✅ Done                        |
-| Jupyter kernel configured | ✅ Done                        |
-| Dataset selected (#7)     | ✅ Done                        |
-| Metric selected (R²)      | ✅ Done                        |
-| Partner A code + visuals  | ✅ Done                        |
-| Partner B code + visuals  | ✅ Done                        |
-| `comparison.csv` updated  | ✅ Done                        |
-| `partner_comparison.md`   | ✅ Drafted                     |
-| `TEAM_INFO.md`            | ⏳ Finalizing                  |
-| `RECOMMENDATION.md`       | ⏳ Pending (after full review) |
+| Repo created              | ✅ Done                       |
+| venv + `requirements.txt` | ✅ Done                       |
+| Jupyter kernel configured | ✅ Done                       |
+| Dataset selected (#7)     | ✅ Done                       |
+| Metric selected (R²)      | ✅ Done                       |
+| Partner A code + visuals  | ✅ Done                       |
+| Partner B code + visuals  | ✅ Done                       |
+| `comparison.csv` updated  | ✅ Done                       |
+| `TEAM_INFO.md`            | ✅ Completed                  |
+| `RECOMMENDATION.md`       | ✅ Completed                  |
 
 ### 📝 Notes
 This repository is intentionally small and focused on evaluation strategy, not model tuning.
@@ -204,7 +201,7 @@ We keep the model and metric fixed and only change how we split and validate, th
 
 to decide which strategy we would trust most for this dataset.
 
-Once RECOMMENDATION.md is complete, this project will be fully ready for submission.
+With RECOMMENDATION.md complete, this project is fully ready for submission.
 
 
 ---

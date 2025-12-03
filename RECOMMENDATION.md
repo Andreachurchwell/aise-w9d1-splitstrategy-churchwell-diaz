@@ -284,7 +284,12 @@ A good model has residuals clustered around **0**, meaning predictions are close
 
 ---
 
-## 6. Recommendation  
+## 6. Data Leakage Analysis
+One potential leakage risk in this dataset is scaling the full dataset before splitting, which would allow information from the test set to influence the training process. Both of our evaluation pipelines avoid this by using a Pipeline that fits the StandardScaler only on the training portion inside each fold or split. Additionally, random splitting could potentially leak ordering information if the dataset were temporal, but because the diabetes dataset is not time-based, our chosen methods do not introduce look-ahead bias. In both approaches, the model only learns from the appropriate training data, ensuring no information from the test set leaks into training.
+
+---
+
+## 7. Recommendation  
 
 Both partners correctly implemented their assigned strategies:
 
@@ -301,4 +306,4 @@ Because of that:
 
 **Final conclusion:**  
 
-> For the Diabetes Regression dataset, I recommend Partner A’s random holdout + KFold strategy as the primary evaluation method. Partner B’s ordered + time-aware approach is still valuable to understand and would be more appropriate for a true time series problem (e.g., forecasting over months or years), but it is less well-matched to this specific dataset.
+> For the Diabetes Regression dataset, we recommend Partner A’s random holdout + KFold strategy as the primary evaluation method. Partner B’s ordered + time-aware approach is still valuable to understand and would be more appropriate for a true time series problem (e.g., forecasting over months or years), but it is less well-matched to this specific dataset. In practice, KFold offers more stable performance estimates and lower variance, making it the more reliable choice for model selection and deployment.
